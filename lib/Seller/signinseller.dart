@@ -51,7 +51,7 @@ class _SignInState extends State<SignInSeller> {
     String cPassword = cPasswordControler.text.trim();
 
     if (email == '' || password == '' || cPassword == '') {
-      // Snakbar is use to show the errors!
+ 
       const message = SnackBar(
         content: Text(
           'The fields can not be empty',

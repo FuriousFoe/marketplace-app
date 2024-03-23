@@ -42,13 +42,13 @@ class _CartPageState extends State<Cart> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-    // _calculateTotalPrice();
+  
   }
 
   @override
   void dispose() {
     super.dispose();
-    _razorpay.clear(); // Removes all listeners
+    _razorpay.clear(); 
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -56,7 +56,7 @@ class _CartPageState extends State<Cart> {
     if (user != null) {
       String userID = user.uid;
       String userEmail = user.email ?? '';
-      // Storage Payment Details in the Firesetore
+
       FirebaseFirestore.instance.collection('payment').add({
         'userID': userID,
         'email': userEmail,
@@ -67,15 +67,15 @@ class _CartPageState extends State<Cart> {
         'timestamp': FieldValue.serverTimestamp(),
       });
     }
-    // Do something when payment succeeds
+
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    // Do something when payment fails
+    
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    // Do something when an external wallet was selected
+
   }
 
   @override
@@ -95,7 +95,7 @@ class _CartPageState extends State<Cart> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: widget.cartItems.length + 1, // +1 for total price row
+              itemCount: widget.cartItems.length + 1, 
               itemBuilder: (context, index) {
                 if (index == widget.cartItems.length) {
                   // Total price row
@@ -250,7 +250,7 @@ void main() {
           quantity: 2,
           price: 15.0,
         ),
-        // Add more items as needed
+      
       ],
     ),
   ));
