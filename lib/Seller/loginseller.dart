@@ -1,7 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:marketplace/Seller/homepageseller.dart';
+
 
 import 'package:marketplace/Seller/signinseller.dart';
 import 'package:marketplace/const.dart';
@@ -66,7 +68,7 @@ class _LoginState extends State<LoginSeller> {
         if (userCredential.user != null) {
           Navigator.popUntil(context, (route) => route.isFirst);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeSeller()));
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());

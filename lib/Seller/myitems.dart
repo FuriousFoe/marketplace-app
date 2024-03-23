@@ -38,11 +38,11 @@ class _MyItemsState extends State<MyItems> {
                 final reqdata =
                     snapshot.data!.docs[index].data() as Map<String, dynamic>;
 
-                String product = reqdata['   '] ?? '';
+                String product = reqdata['Products Type'] ?? '';
                 Timestamp timestamp = reqdata['Time'] ?? Timestamp.now();
                 DateTime dateTime = timestamp.toDate();
                 String formattedTime = DateFormat.yMd().format(dateTime);
-                print(product);
+
                 return Container(
                   margin: const EdgeInsets.all(8),
                   width: MediaQuery.of(context).size.width,

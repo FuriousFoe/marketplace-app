@@ -1,16 +1,18 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:marketplace/Buyer/Spices/spices.dart';
+import 'package:marketplace/Buyer/diwali/diwaliHome.dart';
 import 'package:marketplace/onboard.dart';
 
-class HomeBuyer extends StatelessWidget {
-  const HomeBuyer({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
   static const List<String> sampleImages = [
-    "https://tse1.mm.bing.net/th?id=OIP.OVMeOa7Eg5FUSS7HY2T6jQHaEK&pid=Api&P=0&h=180",
-    "https://tse1.mm.bing.net/th?id=OIP.8Vs97UHkZ8jcgPgTTKYvRgHaEk&pid=Api&P=0&h=180",
-    "https://www.foodfirefriends.com/wp-content/uploads/2019/11/how-long-to-grill-chicken-1200-750x417.jpeg"
+    "https://images.news18.com/ibnlive/uploads/2021/10/diwali-sweet-dishes.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkkdqiSu6mmvrny82ICy9ki_CmR80XqKg_4w&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJKmqF7iR7d3DFvzE9YwKUJ4psGluNMVLWRFxOYBWzO4YmoSBx6ZBKKwCB6GQqo0a5xlA&usqp=CAU"
   ];
 
   @override
@@ -128,8 +130,16 @@ class HomeBuyer extends StatelessWidget {
             ),
             Row(
               children: [
-                optionContainer(context),
-                optionContainer(context),
+                optionContainer(context, () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => Spices())));
+                }, "https://cdn.pixabay.com/photo/2012/04/05/00/41/peppers-25384_640.png",
+                    "Spices"),
+                optionContainer(context, () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => DiwaliHome())));
+                }, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZLhHZCC6ep8NjU6SaU5Py0xNt_tMpjl85g&usqp=CAU",
+                    "Sweets "),
               ],
             ),
             const SizedBox(
@@ -152,12 +162,18 @@ class HomeBuyer extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
+                  SliderContainer("Mango Pickle",
+                      "https://rukminim2.flixcart.com/image/750/900/k5lcvbk0/pickle-murabba/g/r/c/325-premium-mango-pickle-mason-jar-pickle-suruchi-original-imafnbbjknmrzdzt.jpeg?q=20&crop=false"),
+                  SliderContainer("Carrot & Turnip",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9zYxU1PegpCwpQs46Zr047MkppCSa1zPQ_w&usqp=CAU"),
+                  SliderContainer("lemon pickle",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmC62CWG4EeECJx72e6BDPwcKjOXgnXRc5nQ&usqp=CAU"),
+                  SliderContainer("tomato pickle",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJV2WkVfKg7t0clN1iPVLjdO_xSNGz_FyNMg&usqp=CAU"),
+                  SliderContainer("Green Chilli",
+                      "https://www.aachifoods.com/data/products/green-chlli-pickle-1651902759-1.jpeg"),
+                  SliderContainer("Cauliflower",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQII6U5L5APouv5eOCxKrCfbX4IEmrA5Jxwjg&usqp=CAU"),
                 ],
               ),
             ),
@@ -224,7 +240,7 @@ class HomeBuyer extends StatelessWidget {
                   Row(
                     children: [
                       const Text(
-                        "Chicken Grill",
+                        "Festive Items",
                         style: TextStyle(
                           fontFamily: "Local_Font",
                           fontWeight: FontWeight.bold,
@@ -257,9 +273,9 @@ class HomeBuyer extends StatelessWidget {
     );
   }
 
-  Container SliderContainer() {
+  Container SliderContainer(String name, String image) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       height: 100,
       width: 130,
       decoration: BoxDecoration(
@@ -270,12 +286,12 @@ class HomeBuyer extends StatelessWidget {
         SizedBox(
           height: 70,
           child: Image.network(
-            "https://www.pngall.com/wp-content/uploads/2016/05/Pizza-Free-PNG-Image.png",
+            image,
           ),
         ),
-        const Text(
-          "PIZZA",
-          style: TextStyle(
+        Text(
+          name,
+          style: const TextStyle(
             fontSize: 15,
             fontFamily: "Title",
             color: Colors.black54,
@@ -285,13 +301,11 @@ class HomeBuyer extends StatelessWidget {
     );
   }
 
-  Widget optionContainer(BuildContext context) {
+  Widget optionContainer(
+      BuildContext context, VoidCallback function, String image, String type) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: ((context) => Spices())));
-        },
+        onTap: function,
         child: Container(
           margin: EdgeInsets.all(10),
           height: 100,
@@ -314,9 +328,9 @@ class HomeBuyer extends StatelessWidget {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Gourment",
-                      style: TextStyle(
+                    Text(
+                      type,
+                      style: const TextStyle(
                         fontFamily: "Local_Font",
                         fontSize: 22,
                       ),
@@ -349,7 +363,7 @@ class HomeBuyer extends StatelessWidget {
               Container(
                 width: 80,
                 child: Image.network(
-                  "https://static.vecteezy.com/system/resources/previews/003/059/231/non_2x/realistic-cake-pastry-on-white-background-vector.jpg",
+                  image,
                   fit: BoxFit.cover,
                 ),
               )
@@ -388,7 +402,7 @@ class Drawers extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 182, 220, 238),
+                color: Color.fromARGB(255, 238, 85, 74),
               ),
               accountName: Text(
                 // user.displayName!,
@@ -401,8 +415,8 @@ class Drawers extends StatelessWidget {
                 ),
               ),
               accountEmail: Text(
-                "sahildongre01@gcom",
-                style: const TextStyle(
+                "sahildongre01@gmail.com",
+                style: TextStyle(
                   fontSize: 13,
                   color: Colors.black87,
                   fontFamily: "Roboto",
@@ -410,6 +424,34 @@ class Drawers extends StatelessWidget {
                 ),
               ),
             ),
+            // Divider(),
+            listtile("Your orders", () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => Visiting(),
+              //   ),
+              // );
+            }, CupertinoIcons.bag),
+            Divider(),
+            listtile("Favorite orders", () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => Visiting(),
+              //   ),
+              // );
+            }, CupertinoIcons.heart),
+            Divider(),
+            listtile("Order Address", () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => Visiting(),
+              //   ),
+              // );
+            }, CupertinoIcons.building_2_fill),
+            Divider(),
             ElevatedButton(
               style: ButtonStyle(
                   backgroundColor:
@@ -427,4 +469,25 @@ class Drawers extends StatelessWidget {
       ),
     );
   }
+}
+
+ListTile listtile(String title, VoidCallback function, IconData icon) {
+  return ListTile(
+    leading: Icon(icon),
+    trailing: IconButton(
+      icon: const Icon(
+        CupertinoIcons.chevron_right,
+      ),
+      onPressed: function,
+    ),
+    title: Text(
+      title,
+      style: const TextStyle(
+        fontSize: 15,
+        color: Colors.black87,
+        fontFamily: "Title",
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
 }

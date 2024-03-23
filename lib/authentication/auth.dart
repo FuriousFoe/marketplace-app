@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
             return const HomeSeller();
           } else {
            
-            return const HomeBuyer();
+            return const Home();
           }
         } else {
           return const Welcome();

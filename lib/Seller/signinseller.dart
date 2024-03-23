@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:marketplace/Buyer/loginbuyer.dart';
-import 'package:marketplace/Seller/homepageseller.dart';
+
+
 import 'package:marketplace/Seller/loginseller.dart';
 import 'package:marketplace/const.dart';
 import 'package:marketplace/Buyer/homepagebuyer.dart';
@@ -86,8 +86,8 @@ class _SignInState extends State<SignInSeller> {
           _nameController.text.trim(),
           emailControler.text.trim(),
           _ageController.text.trim(),
-          int.parse( _contactnoController.text.trim()),
-       
+          int.parse(_contactnoController.text.trim()),
+
           _addresController.text.trim(),
 
           // _parentnameController.text.trim(),
@@ -98,7 +98,7 @@ class _SignInState extends State<SignInSeller> {
 
         if (userCredential.user != null) {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeSeller()));
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       } on FirebaseAuthException catch (e) {
         final message = SnackBar(

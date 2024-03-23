@@ -79,7 +79,7 @@ class _LoginState extends State<LoginBuyer> {
         if (userCredential.user != null) {
           Navigator.popUntil(context, (route) => route.isFirst);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeBuyer()));
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());
@@ -120,84 +120,84 @@ class _LoginState extends State<LoginBuyer> {
           const SizedBox(
             height: 10,
           ),
-          Container(
-            width: 340,
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 1,
-                )
-              ],
-              color: Color(0xFFF2F2F2),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          login = true;
-                          signIn = false;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 35, bottom: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: login
-                              ? Color(0xFF719f4b)
-                              : Color.fromARGB(255, 189, 189, 189),
-                        ),
-                        height: 30,
-                        width: 80,
-                        // margin: EdgeInsets.only(bottom: 10),
-                        child: const Center(
-                            child: Text(
-                          'Login',
-                          style: TextStyle(fontFamily: 'Mukta'),
-                        )),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        signIn = true;
-                        login = false;
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => SignInBuyer()));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 35, bottom: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: signIn
-                              ? mainColor
-                              : Color.fromARGB(255, 189, 189, 189),
-                        ),
-                        height: 30,
-                        width: 80,
-                        //margin: EdgeInsets.only(bottom: 10),
-                        child: const Center(
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(fontFamily: 'Mukta'),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   width: 340,
+          //   decoration: BoxDecoration(
+          //     boxShadow: const [
+          //       BoxShadow(
+          //         blurRadius: 1,
+          //       )
+          //     ],
+          //     color: Color(0xFFF2F2F2),
+          //     borderRadius: BorderRadius.circular(20),
+          //   ),
+          //   child: Column(
+          //     children: [
+          //       const SizedBox(
+          //         height: 20,
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           GestureDetector(
+          //             onTap: () {
+          //               setState(() {
+          //                 login = true;
+          //                 signIn = false;
+          //               });
+          //             },
+          //             child: Container(
+          //               margin: EdgeInsets.only(left: 35, bottom: 10),
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(10),
+          //                 color: login
+          //                     ? Color(0xFF719f4b)
+          //                     : Color.fromARGB(255, 189, 189, 189),
+          //               ),
+          //               height: 30,
+          //               width: 80,
+          //               // margin: EdgeInsets.only(bottom: 10),
+          //               child: const Center(
+          //                   child: Text(
+          //                 'Login',
+          //                 style: TextStyle(fontFamily: 'Mukta'),
+          //               )),
+          //             ),
+          //           ),
+          //           const SizedBox(
+          //             width: 50,
+          //           ),
+          //           GestureDetector(
+          //             onTap: () {
+          //               signIn = true;
+          //               login = false;
+          //               Navigator.push(context,
+          //                   MaterialPageRoute(builder: (context) => SignInBuyer()));
+          //             },
+          //             child: Container(
+          //               margin: const EdgeInsets.only(right: 35, bottom: 10),
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(10),
+          //                 color: signIn
+          //                     ? mainColor
+          //                     : Color.fromARGB(255, 189, 189, 189),
+          //               ),
+          //               height: 30,
+          //               width: 80,
+          //               //margin: EdgeInsets.only(bottom: 10),
+          //               child: const Center(
+          //                 child: Text(
+          //                   'Sign In',
+          //                   style: TextStyle(fontFamily: 'Mukta'),
+          //                 ),
+          //               ),
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
           SizedBox(
             height: 25,
           ),
@@ -207,8 +207,6 @@ class _LoginState extends State<LoginBuyer> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-               
-                  
                   Padding(
                     padding: const EdgeInsets.only(left: 25, right: 25, top: 5),
                     child: TextField(
@@ -224,7 +222,6 @@ class _LoginState extends State<LoginBuyer> {
                           hintStyle: TextStyle(fontSize: 15)),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(left: 25, right: 25, top: 5),
                     child: TextField(

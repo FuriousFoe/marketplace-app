@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/Buyer/buyerloginwelcome.dart';
 import 'package:marketplace/Buyer/loginbuyer.dart';
 import 'package:marketplace/Seller/loginseller.dart';
 
@@ -60,7 +61,7 @@ class _SelectLoginState extends State<SelectLogin> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginBuyer()),
+                      MaterialPageRoute(builder: (context) => Login()),
                     );
                   },
                   child: Container(

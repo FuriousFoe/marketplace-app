@@ -1,9 +1,11 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:marketplace/Buyer/Spices/spices.dart';
+import 'package:marketplace/Buyer/diwali/diwaliHome.dart';
 import 'package:marketplace/Seller/listitems.dart';
 import 'package:marketplace/Seller/myitems.dart';
 import 'package:marketplace/const.dart';
@@ -12,9 +14,9 @@ import 'package:marketplace/onboard.dart';
 class HomeSeller extends StatefulWidget {
   const HomeSeller({super.key});
   static const List<String> sampleImages = [
-    "https://tse1.mm.bing.net/th?id=OIP.OVMeOa7Eg5FUSS7HY2T6jQHaEK&pid=Api&P=0&h=180",
-    "https://tse1.mm.bing.net/th?id=OIP.8Vs97UHkZ8jcgPgTTKYvRgHaEk&pid=Api&P=0&h=180",
-    "https://www.foodfirefriends.com/wp-content/uploads/2019/11/how-long-to-grill-chicken-1200-750x417.jpeg"
+    "https://images.news18.com/ibnlive/uploads/2021/10/diwali-sweet-dishes.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkkdqiSu6mmvrny82ICy9ki_CmR80XqKg_4w&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJKmqF7iR7d3DFvzE9YwKUJ4psGluNMVLWRFxOYBWzO4YmoSBx6ZBKKwCB6GQqo0a5xlA&usqp=CAU"
   ];
 
   @override
@@ -22,6 +24,7 @@ class HomeSeller extends StatefulWidget {
 }
 
 final user = FirebaseAuth.instance.currentUser!;
+
 String emailids = user.email.toString();
 
 class _HomeSellerState extends State<HomeSeller> {
@@ -140,8 +143,16 @@ class _HomeSellerState extends State<HomeSeller> {
             ),
             Row(
               children: [
-                optionContainer(context),
-                optionContainer(context),
+                optionContainer(context, () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => Spices())));
+                }, "https://cdn.pixabay.com/photo/2012/04/05/00/41/peppers-25384_640.png",
+                    "Spices"),
+                optionContainer(context, () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => DiwaliHome())));
+                }, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHZLhHZCC6ep8NjU6SaU5Py0xNt_tMpjl85g&usqp=CAU",
+                    "Sweets "),
               ],
             ),
             const SizedBox(
@@ -164,12 +175,18 @@ class _HomeSellerState extends State<HomeSeller> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
-                  SliderContainer(),
+                  SliderContainer("Mango Pickle",
+                      "https://rukminim2.flixcart.com/image/750/900/k5lcvbk0/pickle-murabba/g/r/c/325-premium-mango-pickle-mason-jar-pickle-suruchi-original-imafnbbjknmrzdzt.jpeg?q=20&crop=false"),
+                  SliderContainer("Carrot & Turnip",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9zYxU1PegpCwpQs46Zr047MkppCSa1zPQ_w&usqp=CAU"),
+                  SliderContainer("lemon pickle",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmC62CWG4EeECJx72e6BDPwcKjOXgnXRc5nQ&usqp=CAU"),
+                  SliderContainer("tomato pickle",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJV2WkVfKg7t0clN1iPVLjdO_xSNGz_FyNMg&usqp=CAU"),
+                  SliderContainer("Green Chilli",
+                      "https://www.aachifoods.com/data/products/green-chlli-pickle-1651902759-1.jpeg"),
+                  SliderContainer("Cauliflower",
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQII6U5L5APouv5eOCxKrCfbX4IEmrA5Jxwjg&usqp=CAU"),
                 ],
               ),
             ),
@@ -236,7 +253,7 @@ class _HomeSellerState extends State<HomeSeller> {
                   Row(
                     children: [
                       const Text(
-                        "Chicken Grill",
+                        "Festive Items",
                         style: TextStyle(
                           fontFamily: "Local_Font",
                           fontWeight: FontWeight.bold,
@@ -269,9 +286,9 @@ class _HomeSellerState extends State<HomeSeller> {
     );
   }
 
-  Container SliderContainer() {
+  Container SliderContainer(String name, String image) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       height: 100,
       width: 130,
       decoration: BoxDecoration(
@@ -282,12 +299,12 @@ class _HomeSellerState extends State<HomeSeller> {
         SizedBox(
           height: 70,
           child: Image.network(
-            "https://www.pngall.com/wp-content/uploads/2016/05/Pizza-Free-PNG-Image.png",
+            image,
           ),
         ),
-        const Text(
-          "PIZZA",
-          style: TextStyle(
+        Text(
+          name,
+          style: const TextStyle(
             fontSize: 15,
             fontFamily: "Title",
             color: Colors.black54,
@@ -297,13 +314,11 @@ class _HomeSellerState extends State<HomeSeller> {
     );
   }
 
-  Widget optionContainer(BuildContext context) {
+  Widget optionContainer(
+      BuildContext context, VoidCallback function, String image, String type) {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: ((context) => Spices())));
-        },
+        onTap: function,
         child: Container(
           margin: EdgeInsets.all(10),
           height: 100,
@@ -326,9 +341,9 @@ class _HomeSellerState extends State<HomeSeller> {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Gourment",
-                      style: TextStyle(
+                    Text(
+                      type,
+                      style: const TextStyle(
                         fontFamily: "Local_Font",
                         fontSize: 22,
                       ),
@@ -361,7 +376,7 @@ class _HomeSellerState extends State<HomeSeller> {
               Container(
                 width: 80,
                 child: Image.network(
-                  "https://static.vecteezy.com/system/resources/previews/003/059/231/non_2x/realistic-cake-pastry-on-white-background-vector.jpg",
+                  image,
                   fit: BoxFit.cover,
                 ),
               )
@@ -452,18 +467,6 @@ class _DrawersState extends State<Drawers> {
                 ),
               ),
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.red)),
-              onPressed: () {
-                signUserOut();
-              },
-              child: const Text(
-                "Sign Out",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -476,12 +479,50 @@ class _DrawersState extends State<Drawers> {
             div,
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) =>  MyItems(emails: emailids)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyItems(emails: emailids)));
               },
               child: listtile("My Items"),
             ),
             div,
+            GestureDetector(
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) =>  MyItems(emails: emailids)));
+              },
+              child: listtile("Your orders"),
+            ),
+            div,
+            GestureDetector(
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) =>  MyItems(emails: emailids)));
+              },
+              child: listtile("Favorite orders"),
+            ),
+            div,
+            GestureDetector(
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) =>  MyItems(emails: emailids)));
+              },
+              child: listtile("Order Address"),
+            ),
+            div,
+            ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateColor.resolveWith((states) => Colors.red)),
+              onPressed: () {
+                signUserOut();
+              },
+              child: const Text(
+                "Sign Out",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

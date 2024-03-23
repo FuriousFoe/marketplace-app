@@ -35,11 +35,24 @@ List<String> listitem = [
   'Cardamom',
   'Red Chilli',
   'Haldi',
+  'Mango Pickle',
+  'Carrot & Turnip',
+  'Lemon Pickle',
+  'Tomato Pickle',
+  'Green Chilli',
+];
+List<String> listtype = [
+  'Select Products Type',
+  'Spices',
+  'Sweets',
+  'Pickle',
 ];
 
 class _ListItemsState extends State<ListItems> {
   String dropdownValueItem = listitem.first;
   String setitem = "";
+  String dropdownValueItemType = listtype.first;
+  String settype = "";
   String imageUrl1 = '';
   String imageUrl2 = '';
   String name = '';
@@ -84,6 +97,16 @@ class _ListItemsState extends State<ListItems> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: dropdownMenu(listtype, dropdownValueItemType,
+                    (String? value) {
+                  setState(() {
+                    dropdownValueItemType = value!;
+                    settype = dropdownValueItemType;
+                  });
+                }),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
@@ -383,6 +406,7 @@ class _ListItemsState extends State<ListItems> {
                               .doc()
                               .set({
                             'Products Type': setitem,
+                            'Product Category': settype,
                             'Image URL 1': imageUrl1,
                             'Image URL 2': imageUrl2,
                             'Price': int.parse(priceController.text.trim()),
@@ -398,6 +422,7 @@ class _ListItemsState extends State<ListItems> {
                                 .doc()
                                 .set({
                               'Products Type': setitem,
+                              'Product Category': settype,
                               'Image URL 1': imageUrl1,
                               'Image URL 2': imageUrl2,
                               'Price': int.parse(priceController.text.trim()),
